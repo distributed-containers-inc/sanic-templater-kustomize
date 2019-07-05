@@ -1,0 +1,6 @@
+environments:
+  dev:
+    clusterProvisioner: localdev
+  prod: {}
+deploy:
+  templaterImage: sanic/templater-kustomize

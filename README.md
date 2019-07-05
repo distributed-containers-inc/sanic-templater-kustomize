@@ -16,16 +16,28 @@ deploy:
 It expects your deploy folder to look like the following:
 ```
 deploy
-├── base
-│   ├── kustomization.yaml
-│   └── (other base yamls...)
-└── overlays
-    ├── dev
+└── in
+    ├── base
     │   ├── kustomization.yaml
-    │   └── (other patches...)
-    └── prod
-        ├── kustomization.yaml
-        └── (other patches...)
+    │   └── (other base yamls...)
+    └── overlays
+        ├── dev
+        │   ├── kustomization.yaml
+        │   └── (other patches...)
+        └── prod
+            ├── kustomization.yaml
+            └── (other patches...)
 ```
 
 Note that the directories in the overlays/ directory have a one-to-one coorespondance with the keys in the sanic.yaml environments: block.
+
+## Example
+To try the example in isolation, run the following:
+```
+docker build . -t sanic/templater-kustomize
+docker run --rm \
+    -v $(pwd)/deploy/in:/in:ro \
+    -v $(pwd)/deploy/out:out:rw \
+    -e SANIC_ENV=dev \
+    sanic/templater-kustomize 
+```
