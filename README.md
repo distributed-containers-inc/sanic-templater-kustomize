@@ -10,7 +10,7 @@ environments:
   prod:
     (the sanic configuration for prod)
 deploy:
-  templaterImage: sanic/templater-kustomize
+  templaterImage: distributedcontainers/templater-kustomize
 ```
 
 It expects your deploy folder to look like the following:
@@ -34,10 +34,10 @@ Note that the directories in the overlays/ directory have a one-to-one coorespon
 ## Example
 To try the example in isolation, run the following:
 ```
-docker build . -t sanic/templater-kustomize
+docker build . -t distributedcontainers/templater-kustomize
 docker run --rm \
     -v $(pwd)/deploy/in:/in:ro \
     -v $(pwd)/deploy/out:out:rw \
     -e SANIC_ENV=dev \
-    sanic/templater-kustomize 
+    distributedcontainers/templater-kustomize 
 ```
